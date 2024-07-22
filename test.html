@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <title>My React App</title> -->
-  
-  <!-- Balises Open Graph -->
-  <!-- <meta property="og:title" content="Ma page" />
-  <meta property="og:description" content="Ceci est une description de ma page pour les réseaux sociaux." />
-  <meta property="og:image" content="https://images.pexels.com/photos/26508609/pexels-photo-26508609/free-photo-of-a-train-is-traveling-down-a-track-next-to-a-road.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-  <meta property="og:url" content="https://images.pexels.com/photos/26508609/pexels-photo-26508609/free-photo-of-a-train-is-traveling-down-a-track-next-to-a-road.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 "/>
-  <meta property="og:type" content="website" /> -->
+  <title>Dynamic Open Graph</title>
+  <!-- Open Graph Metadata -->
+  <meta property="og:title" content="Default Title" id="ogTitle">
+  <meta property="og:description" content="Default Description" id="ogDescription">
+  <meta property="og:url" content="https://centrale-ruddy.vercel.app" id="ogUrl">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://centrale-ruddy.vercel.app/default-image.jpg" id="ogImage">
 </head>
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <p>bonjour</p>
+  <h1>Dynamic Open Graph Metadata Example</h1>
+  <script>
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      const results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Update Open Graph metadata
+    function updateOpenGraphMetadata() {
+      const title = getUrlParameter('title') || 'Default Title';
+      const description = getUrlParameter('description') || 'Default Description';
+      
+      document.getElementById('ogTitle').setAttribute('content', title);
+      document.getElementById('ogDescription').setAttribute('content', description);
+      document.title = title;  // Update the page title as well
+    }
+
+    // Call the function to update metadata
+    updateOpenGraphMetadata();
+  </script>
 </body>
 </html>
+
